@@ -1,8 +1,16 @@
-const express = require ('express');
-
+const express = require('express');
+const path = require('path');
 const app = express();
+const port = 3000;
 
-app.get('/',(req,res)=> res.send ('Hello world con Express'))
+// Configuración de archivos estáticos
+app.use(express.static(path.join(__dirname, 'public')));
 
-app.listen(3000);
-console.log ('Server on port 3000')
+// Página principal
+app.get('/', (req, res) => {
+    res.sendFile(path.join(__dirname, 'public', 'index.html'));
+});
+
+app.listen(port, () => {
+    console.log(`Servidor escuchando en http://localhost:${port}`);
+});
